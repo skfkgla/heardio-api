@@ -1,6 +1,6 @@
 package com.heardio.api.radio.domain;
 
-import com.heardio.api.common.entity.BaseEntity;
+import com.heardio.api.global.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;

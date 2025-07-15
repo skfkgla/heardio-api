@@ -1,4 +1,4 @@
-package com.heardio.api.common.entity;
+package com.heardio.api.global.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
