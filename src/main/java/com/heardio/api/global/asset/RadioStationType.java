@@ -91,9 +91,4 @@ public enum RadioStationType {
         this.displayName = displayName;
         this.description = description;
     }
-
-    @Override
-    public String toString() {
-        return displayName + " (" + description + ")";
-    }
 }

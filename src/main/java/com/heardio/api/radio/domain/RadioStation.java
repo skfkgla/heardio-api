@@ -1,7 +1,6 @@
 package com.heardio.api.radio.domain;
 
 import com.heardio.api.global.asset.RadioStationType;
-import com.heardio.api.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +11,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "radio_station")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RadioStation extends BaseEntity {
+public class RadioStation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "station_uuid", length = 36, nullable = false, updatable = false)
     private String stationUuid;
@@ -27,15 +29,15 @@ public class RadioStation extends BaseEntity {
     @Column(name = "description", length = 500)
     private String description;
 
-
     @Builder
-    RadioStation(String stationUuid,
+    RadioStation(Long id,
+                 String stationUuid,
                  RadioStationType radioStationType,
                  String streamUrl,
                  String description) {
-        this.stationUuid       = stationUuid;
-        this.radioStationType  = radioStationType;
-        this.streamUrl         = streamUrl;
-        this.description       = description;
+        this.stationUuid = stationUuid;
+        this.radioStationType = radioStationType;
+        this.streamUrl = streamUrl;
+        this.description = description;
     }
 }
