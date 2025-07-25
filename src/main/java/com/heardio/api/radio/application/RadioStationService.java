@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RadioStationService {
     private final RadioStationRepository radioStationRepository;
 
+    @Transactional
     public void createRadioStation(CreateRadioStationRequestDto request) {
         RadioStation radioStation = RadioStation.builder()
                 .stationUuid(request.stationUuid())
@@ -22,4 +23,6 @@ public class RadioStationService {
                 .build();
         radioStationRepository.save(radioStation);
     }
+
+
 }
