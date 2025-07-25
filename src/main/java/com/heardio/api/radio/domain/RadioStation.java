@@ -29,15 +29,24 @@ public class RadioStation {
     @Column(name = "description", length = 500)
     private String description;
 
+    @Column(name = "click_count")
+    private long clickCount;
+
     @Builder
     RadioStation(Long id,
                  String stationUuid,
                  RadioStationType radioStationType,
                  String streamUrl,
-                 String description) {
+                 String description,
+                 long clickCount) {
         this.stationUuid = stationUuid;
         this.radioStationType = radioStationType;
         this.streamUrl = streamUrl;
         this.description = description;
+        this.clickCount = clickCount;
+    }
+
+    public void increaseClickCount() {
+        this.clickCount++;
     }
 }
