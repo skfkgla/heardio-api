@@ -4,15 +4,20 @@ import com.heardio.api.global.asset.RadioStationType;
 import com.heardio.api.radio.domain.RadioStation;
 
 public record GetRadioStationResponseDto(
-        Long radioStationId,
-        RadioStationType radioStationType,
-        String streamUrl,
-        String description
+	Long radioStationId,
+	String stationUuid,
+	RadioStationType radioStationType,
+	String streamUrl,
+	String description,
+	long clickCount
 ) {
-    public static GetRadioStationResponseDto from(RadioStation radioStation) {
-        return new GetRadioStationResponseDto(radioStation.getId(),
-                radioStation.getRadioStationType(),
-                radioStation.getStreamUrl(),
-                radioStation.getDescription());
-    }
+	public static GetRadioStationResponseDto from(RadioStation radioStation) {
+		return new GetRadioStationResponseDto(
+			radioStation.getId(),
+			radioStation.getStationUuid(),
+			radioStation.getRadioStationType(),
+			radioStation.getStreamUrl(),
+			radioStation.getDescription(),
+			radioStation.getClickCount());
+	}
 }
