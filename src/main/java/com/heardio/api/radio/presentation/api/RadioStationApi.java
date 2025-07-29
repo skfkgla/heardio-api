@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "라디오 방송국", description = "라디오 방송국 관련 API")
 public interface RadioStationApi {
 
-	@Operation(summary = "라디오 방송국 생성", description = "새로운 라디오 방송국을 생성합니다. (어드민 전용)")
+	@Operation(summary = "라디오 방송국 생성(어드민 전용)", description = "새로운 라디오 방송국을 생성합니다.(어드민 전용)")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "201", description = "라디오 방송국 생성 성공"),
 		@ApiResponse(responseCode = "403", description = "권한 없음 (어드민 전용)", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
@@ -58,7 +58,7 @@ public interface RadioStationApi {
 	GetRadioStationResponseDto getRadioStation(
 		@Parameter(description = "라디오 방송국 ID", required = true, example = "1") Long radioStationId);
 
-	@Operation(summary = "라디오 방송국 수정", description = "ID로 특정 라디오 방송국의 정보를 수정합니다. (어드민 전용)")
+	@Operation(summary = "라디오 방송국 수정(어드민 전용)", description = "ID로 특정 라디오 방송국의 정보를 수정합니다.(어드민 전용)")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "라디오 방송국 수정 성공"),
 		@ApiResponse(responseCode = "400", description = "잘못된 요청 데이터", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
@@ -69,7 +69,7 @@ public interface RadioStationApi {
 		@Parameter(description = "라디오 방송국 수정 요청 데이터", required = true) UpdateRadioStationRequestDto request
 	);
 
-	@Operation(summary = "라디오 방송국 수정", description = "ID로 특정 라디오 방송국의 정보를 삭제합니다. (어드민 전용)")
+	@Operation(summary = "라디오 방송국 삭제(어드민 전용)", description = "ID로 특정 라디오 방송국의 정보를 삭제합니다.(어드민 전용)")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "라디오 방송국 삭제 성공"),
 		@ApiResponse(responseCode = "403", description = "권한 없음 (어드민 전용)", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
