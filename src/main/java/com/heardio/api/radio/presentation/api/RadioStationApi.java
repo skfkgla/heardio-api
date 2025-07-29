@@ -56,9 +56,7 @@ public interface RadioStationApi {
 		@ApiResponse(responseCode = "404", description = "라디오 방송국을 찾을 수 없음", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	GetRadioStationResponseDto getRadioStation(
-		@Parameter(description = "라디오 방송국 ID", required = true, example = "1")
-		Long radioStationId
-	);
+		@Parameter(description = "라디오 방송국 ID", required = true, example = "1") Long radioStationId);
 
 	@Operation(summary = "라디오 방송국 수정", description = "ID로 특정 라디오 방송국의 정보를 수정합니다. (어드민 전용)")
 	@ApiResponses(value = {
@@ -67,10 +65,15 @@ public interface RadioStationApi {
 		@ApiResponse(responseCode = "403", description = "권한 없음 (어드민 전용)", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "404", description = "라디오 방송국을 찾을 수 없음", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	void updateRadioStation(
-		@Parameter(description = "라디오 방송국 ID", required = true, example = "1")
-		Long radioStationId,
-		@Parameter(description = "라디오 방송국 수정 요청 데이터", required = true)
-		UpdateRadioStationRequestDto request
+	void updateRadioStation(@Parameter(description = "라디오 방송국 ID", required = true, example = "1") Long radioStationId,
+		@Parameter(description = "라디오 방송국 수정 요청 데이터", required = true) UpdateRadioStationRequestDto request
 	);
+
+	@Operation(summary = "라디오 방송국 수정", description = "ID로 특정 라디오 방송국의 정보를 삭제합니다. (어드민 전용)")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "라디오 방송국 삭제 성공"),
+		@ApiResponse(responseCode = "403", description = "권한 없음 (어드민 전용)", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "404", description = "라디오 방송국을 찾을 수 없음", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	void deleteRadioStation(@Parameter(description = "라디오 방송국 ID", required = true, example = "1") Long radioStationId);
 }

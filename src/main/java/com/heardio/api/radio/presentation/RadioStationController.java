@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,9 +62,14 @@ public class RadioStationController implements RadioStationApi {
 
 	@Override
 	@PutMapping("/{radioStationId}")
-	public void updateRadioStation(
-		@PathVariable("radioStationId") Long radioStationId,
+	public void updateRadioStation(@PathVariable("radioStationId") Long radioStationId,
 		@RequestBody @Validated UpdateRadioStationRequestDto request) {
 		radioStationService.updateRadioStation(radioStationId, request);
+	}
+
+	@Override
+	@DeleteMapping("/{radioStationId}")
+	public void deleteRadioStation(@PathVariable("radioStationId") Long radioStationId) {
+		radioStationService.deleteRadioStation(radioStationId);
 	}
 }
