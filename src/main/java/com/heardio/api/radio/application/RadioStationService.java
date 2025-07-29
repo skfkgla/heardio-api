@@ -12,6 +12,7 @@ import com.heardio.api.radio.application.dto.CreateRadioStationRequestDto;
 import com.heardio.api.radio.application.dto.GetRadioStationResponseDto;
 import com.heardio.api.radio.application.dto.GetRadioStationsRequestDto;
 import com.heardio.api.radio.application.dto.GetRadioStationsResponseDto;
+import com.heardio.api.radio.application.dto.UpdateRadioStationRequestDto;
 import com.heardio.api.radio.domain.RadioStation;
 import com.heardio.api.radio.domain.repository.RadioStationRepository;
 
@@ -47,5 +48,13 @@ public class RadioStationService {
 			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
 		radioStation.increaseClickCount();
 		return GetRadioStationResponseDto.from(radioStation);
+	}
+
+	@Transactional
+	public void updateRadioStation(Long radioStationId, UpdateRadioStationRequestDto request) {
+		RadioStation radioStation = radioStationRepository.findById(radioStationId)
+			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
+		radioStation.updateRadioStation(request.stationUuid(), request.radioStationType(), request.streamUrl(),
+			request.description());
 	}
 }
