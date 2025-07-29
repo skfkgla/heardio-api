@@ -54,6 +54,7 @@ public class RadioStationService {
 	public void updateRadioStation(Long radioStationId, UpdateRadioStationRequestDto request) {
 		RadioStation radioStation = radioStationRepository.findById(radioStationId)
 			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
-		radioStation.updateRadioStation(request.radioStationType(), request.streamUrl(), request.description());
+		radioStation.updateRadioStation(request.stationUuid(), request.radioStationType(), request.streamUrl(),
+			request.description());
 	}
 }
