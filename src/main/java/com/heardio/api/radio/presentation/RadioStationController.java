@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.heardio.api.radio.application.dto.CreateRadioStationRequestDto;
 import com.heardio.api.radio.application.dto.GetRadioStationResponseDto;
 import com.heardio.api.radio.application.dto.GetRadioStationsRequestDto;
 import com.heardio.api.radio.application.dto.GetRadioStationsResponseDto;
+import com.heardio.api.radio.application.dto.UpdateRadioStationRequestDto;
 import com.heardio.api.radio.presentation.api.RadioStationApi;
 
 import lombok.RequiredArgsConstructor;
@@ -55,5 +57,13 @@ public class RadioStationController implements RadioStationApi {
 	@GetMapping("/{radioStationId}")
 	public GetRadioStationResponseDto getRadioStation(@PathVariable("radioStationId") Long radioStationId) {
 		return radioStationService.getRadioStation(radioStationId);
+	}
+
+	@Override
+	@PutMapping("/{radioStationId}")
+	public void updateRadioStation(
+		@PathVariable("radioStationId") Long radioStationId,
+		@RequestBody @Validated UpdateRadioStationRequestDto request) {
+		radioStationService.updateRadioStation(radioStationId, request);
 	}
 }

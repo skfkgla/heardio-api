@@ -49,4 +49,16 @@ public class RadioStation {
     public void increaseClickCount() {
         this.clickCount++;
     }
+
+    public void updateRadioStation(RadioStationType radioStationType, String streamUrl, String description) {
+        if (radioStationType != null) {
+            this.radioStationType = radioStationType;
+        }
+        if (streamUrl != null && !streamUrl.isBlank()) {
+            this.streamUrl = streamUrl;
+        }
+        if (description != null) {
+            this.description = description;
+        }
+    }
 }
