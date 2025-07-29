@@ -20,11 +20,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class RadioStationService {
 	private final RadioStationRepository radioStationRepository;
 
-	@Transactional
 	public void createRadioStation(CreateRadioStationRequestDto request) {
 		RadioStation radioStation = RadioStation.builder()
 			.stationUuid(request.stationUuid())
@@ -35,6 +34,7 @@ public class RadioStationService {
 		radioStationRepository.save(radioStation);
 	}
 
+	@Transactional(readOnly = true)
 	public GetRadioStationsResponseDto getRadioStations(GetRadioStationsRequestDto request) {
 		PageRequest pageRequest = PageRequest.of(request.page(), request.pageSize(),
 			Sort.by(Sort.Direction.fromString(request.sort().get(1)), request.sort().get(0)));
@@ -42,7 +42,6 @@ public class RadioStationService {
 		return GetRadioStationsResponseDto.from(result);
 	}
 
-	@Transactional
 	public GetRadioStationResponseDto getRadioStation(Long radioStationId) {
 		RadioStation radioStation = radioStationRepository.findById(radioStationId)
 			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
@@ -50,11 +49,16 @@ public class RadioStationService {
 		return GetRadioStationResponseDto.from(radioStation);
 	}
 
-	@Transactional
 	public void updateRadioStation(Long radioStationId, UpdateRadioStationRequestDto request) {
 		RadioStation radioStation = radioStationRepository.findById(radioStationId)
 			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
 		radioStation.updateRadioStation(request.stationUuid(), request.radioStationType(), request.streamUrl(),
 			request.description());
+	}
+
+	public void deleteRadioStation(Long radioStationId) {
+		RadioStation radioStation = radioStationRepository.findById(radioStationId)
+			.orElseThrow(() -> new NotFoundException(ErrorCode.RADIO_STATION_NOT_FOUND));
+		radioStationRepository.delete(radioStation);
 	}
 }
